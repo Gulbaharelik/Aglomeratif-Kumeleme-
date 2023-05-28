@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include <math.h>
 
-//Tanımlamalar yapılır.
+//TanÄ±mlamalar yapÄ±lÄ±r.
 struct kume {
     float x;
     float y;
     int kume_atama;
 };
 
-//Kümeler arası mesafe hesaplanır.
+//KÃ¼meler arasÄ± mesafe hesaplanÄ±r.
 float mesafe_hesabi(struct kume kume1, struct kume kume2) {
     return sqrt(pow(kume1.x - kume2.x, 2) + pow(kume1.y - kume2.y, 2));
 }
 
-//Kumelerin ortalaması alınıp yeni kumeler oluşturulur.
+//Kumelerin ortalamasÄ± alÄ±nÄ±p yeni kumeler oluÅŸturulur.
 struct kume gecici_kumeler(struct kume kume1, struct kume kume2) {
     struct kume gecici;
    gecici.x = (kume1.x + kume2.x) / 2;
@@ -22,7 +22,7 @@ struct kume gecici_kumeler(struct kume kume1, struct kume kume2) {
     return gecici;
 }
 
-//Küme değerleri.
+//KÃ¼me deÄŸerleri.
 int main() {
 	int i,j;
     int sayi_degerler = 7;
@@ -39,7 +39,7 @@ printf("\n");
 printf("******MALL_CUSTOMERS yaslari ve yillik geliri bulunan 7 kisinin toplayici hiyerarsik kumelemesi****\n");
 printf("\n");
 
-    // Hiyerarşik birleştirici kümeleme işlemi yapılır.
+    // HiyerarÅŸik birleÅŸtirici kÃ¼meleme iÅŸlemi yapÄ±lÄ±r.
     int sayi_kumeleme = sayi_degerler;
     struct kume kumeler[sayi_degerler];
     for ( i = 0; i < sayi_degerler; i++) {
@@ -47,7 +47,7 @@ printf("\n");
     }
 
     while (sayi_kumeleme > 1) {
-        // En yakın iki küme bulunur.
+        // En yakÄ±n iki kÃ¼me bulunur.
         float orta_mesafe = INFINITY;
         int orta_deger1, orta_deger2;
 
@@ -62,11 +62,11 @@ printf("\n");
             }
         }
 
-        // İki küme birleştirilir.
+        // Ä°ki kÃ¼me birleÅŸtirilir.
         struct kume gecici_kumeleme=gecici_kumeler(kumeler[orta_deger1], kumeler[orta_deger2]);
         gecici_kumeleme.kume_atama = (sayi_degerler - sayi_kumeleme )+ 1;
 
-        // Birleştirilen kümeyle birlikte küme listesini güncelleme
+        // BirleÅŸtirilen kÃ¼meyle birlikte kÃ¼me listesini gÃ¼ncelleme
         kumeler[orta_deger1] =gecici_kumeleme;
         for (i = orta_deger2; i < sayi_kumeleme - 1; i++) {
             kumeler[i] = kumeler[i + 1];
@@ -74,7 +74,7 @@ printf("\n");
 
         sayi_kumeleme--;
 
-        // Kümeleme ayrıntıları yazdırılır.
+        // KÃ¼meleme ayrÄ±ntÄ±larÄ± yazdÄ±rÄ±lÄ±r.
         printf("Adim %d:\n",(sayi_degerler - sayi_kumeleme));
         for ( i = 0; i < sayi_kumeleme; i++) {
             printf("Kume sayisi:%d: (%.2f, %.2f)\n", kumeler[i].kume_atama, kumeler[i].x, kumeler[i].y);
